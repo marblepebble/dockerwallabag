@@ -1,4 +1,4 @@
-#wallabag-docker
+#dockerwallabag
 Dockerfile used to build a wallabag docker image.
 
 ##Credits
@@ -20,16 +20,16 @@ This image is based on [phusion/baseimage-docker](https://registry.hub.docker.co
 ###Download
 If you want to prefetch the image to store locally before deploying you should run the following:  
 
-    docker pull marble/wallabag
+    docker pull marble/dockerwallabag
 
 ###Running
 **To Run a Named Instance Linked to a Postgres Container**
 
-    docker run --name wallabag --link sqlcontainer:sqlcontainer -p 80:80 -d marble/wallabag
+    docker run --name wallabag --link sqlcontainer:sqlcontainer -p 80:80 -d marble/dockerwallabag
 
 **To Pass a Custom Salt Value to the Config (Highly Recommended)**
 
-    docker run --name wallabag -p 80:80 -e WALLABAG_SALT=somesaltvaluemuchmoresecurethanthis -d marble/wallabag
+    docker run --name wallabag -p 80:80 -e WALLABAG_SALT=somesaltvaluemuchmoresecurethanthis -d marble/dockerwallabag
 
 Check the [phusion/baseimage](https://github.com/phusion/baseimage-docker) documentation for all kind of additional options and switches.
 
