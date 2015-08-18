@@ -5,7 +5,6 @@
 # a list of version numbers.
 
 FROM phusion/baseimage:0.9.16
-MAINTAINER Ainsley Pereira <dockerhub@pebble.org.uk>
 
 # Set correct environment variables.
 ENV HOME /root
@@ -64,6 +63,8 @@ RUN cd /var/www \
 
 COPY conf/99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
 
+COPY conf/config.inc.php /var/www/wallabag/inc/poche/config.inc.php
+
 RUN rm -f /tmp/wallabag-$WALLABAG_VERSION.zip
 
 RUN chown -R www-data:www-data /var/www/wallabag
@@ -76,9 +77,9 @@ EXPOSE 80
 
 # Expose volumes
 WORKDIR /
-RUN ln -s /var/www/wallabag wallabag
 
-VOLUME /wallabag
+VOLUME /wallabag/assets
+VOLUME /wallabag/cache
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
