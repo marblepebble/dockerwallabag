@@ -59,11 +59,15 @@ RUN cd /var/www \
     && mv wallabag-$WALLABAG_VERSION wallabag \
     && cd wallabag \
     && curl -s http://getcomposer.org/installer | php \
-    && php composer.phar install
+    && php composer.phar install \
+    && mkdir write \
+    && mv assets cache write \
+    && sed -i "s#require_once INCLUDES . '/poche/config.inc.php'#require_once ROOT . '/write/config.inc.php'#" inc/poche/global.inc.php \
+    && sed -i "s#inc/poche/config.inc.php#write/config.inc.php#" install/index.php
 
 COPY conf/99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
 
-COPY conf/config.inc.php /var/www/wallabag/inc/poche/config.inc.php
+COPY conf/config.inc.php /var/www/wallabag/write/config.inc.php
 
 RUN rm -f /tmp/wallabag-$WALLABAG_VERSION.zip
 
@@ -78,8 +82,7 @@ EXPOSE 80
 # Expose volumes
 WORKDIR /
 
-VOLUME /wallabag/assets
-VOLUME /wallabag/cache
+VOLUME /wallabag/write
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

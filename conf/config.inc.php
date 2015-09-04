@@ -1,3 +1,3 @@
-@define ('ABS_PATH', '/wallabag/assets/');
-@define ('CACHE', '/wallabag/cache');
+@define ('ABS_PATH', '/wallabag/write/assets/');
+@define ('CACHE', '/wallabag/write/cache');
 
