@@ -82,7 +82,7 @@ EXPOSE 80
 # Expose volumes
 WORKDIR /
 
-VOLUME /wallabag/write
+VOLUME /var/www/wallabag/write
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
